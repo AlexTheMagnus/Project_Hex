@@ -40,7 +40,7 @@ int main() {
 
     //modificar línea a línea
     while(getline(fileapp, linea, '\n')){
-      if((linea.compare(0,6,"Icon=/")) == 0) {  //comprueba si se encuentra en la linea de "Icon=/"
+      if((linea.compare(0,5,"Icon=")) == 0) {  //comprueba si se encuentra en la linea de "Icon="
         linea = "Icon=" + icon;                 //si entra cambia la ruta del icono
       }
       fileapptemp << linea <<endl;                         //escribe en el nuevo fichero

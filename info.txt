@@ -1,8 +1,8 @@
-atom.desktop,atom_honeycomb3.png
+firefox.desktop,firefox_blue.png
+telegramdesktop.desktop,telegram_honeycomb2.png
 spotify.desktop,spotisaur.png
+atom.desktop,atom_honeycomb3.png
+filezilla.desktop,filezilla_honeycomb.png
 steam.desktop,steam_honeycomb.png
 org.gnome.Todo.desktop,pinguevo_honeycomb4.png
-telegramdesktop.desktop,telegram_honeycomb2.png
 evince.desktop,pdf_honeycomb.png
-filezilla.desktop,filezilla_honeycomb.png
-
