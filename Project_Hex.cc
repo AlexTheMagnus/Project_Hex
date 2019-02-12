@@ -12,10 +12,11 @@ using std::endl;
 #include <string>
 using std::string;
 
+//Devuelve el path de la carpeta donde estan los iconos
 string getpath() {
    char cwd[PATH_MAX];
    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-       string ruta_ejec(cwd);          //Paso de char* a string con el constructor de string
+       string ruta_ejec(cwd);            //Paso de char* a string con el constructor de string
        return (ruta_ejec + "/icons/");   //ruta donde se esta ejecutando el programa
    }
    else {
