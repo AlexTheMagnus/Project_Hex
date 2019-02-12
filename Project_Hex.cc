@@ -26,6 +26,12 @@ string getpath() {
 }
 
 int main() {
+    //system("clear");
+    cout << "\33[2J";       //hace un clear pero mas bonito
+    cout << endl;
+    cout << "\e[4;34m";
+    cout << "\t" << "Project_Hex" << endl;
+    cout << "\e[0m";
     cout << endl;
 
     string app, icon;                          //nombre app, nombre del nuevo icono
@@ -75,15 +81,16 @@ int main() {
 
     fileapp.close();
     cout << "\e[0;32m";     //Pone las letras en color verde
-    cout << "OK" << endl;
+    cout << "   OK" << endl;
     cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
   }
   fileinfo.close();
   cout << endl;
   cout << "\e[1;32m";       //Pone las letras en color verde
   cout << "--Iconos cambiados correctamente. DONE.--" << endl;
-  //cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
-  //cout << "\e[0;34m" << endl;   //Color azul
-  //cout << "Pulse intro para terminar el programa" << endl;
-
+  cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
+  cout << "\e[0;34m" << endl;   //Color azul
+  cout << "Pulse intro para terminar el programa" << endl;
+  getchar();
+  system("reset");
 }
