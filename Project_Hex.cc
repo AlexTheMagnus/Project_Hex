@@ -103,16 +103,16 @@ int main() {
 
 
             fileapp.close();
-            cout << GREEN;     //Pone las letras en color verde
+            cout << GREEN;          //Pone las letras en color verde
             cout << "   OK" << endl;
-            cout << RESET;        //Reset de formato de letra (color, negrita,..)
+            cout << RESET;          //Reset de formato de letra (color, negrita,..)
     }
     fileinfo.close();
     cout << endl;
     cout << BGREEN;
     cout << "--Iconos cambiados correctamente. DONE.--" << endl;
-    cout << RESET;                //Reset de formato de letra (color, negrita,..)
-    cout << BLUE << endl;     //Color azul
+    cout << RESET;               //Reset de formato de letra (color, negrita,..)
+    cout << BLUE << endl;        //Color azul
     cout << "Pulse intro para terminar el programa" << endl;
     getchar();
     system("reset");
