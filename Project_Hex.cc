@@ -12,6 +12,17 @@ using std::endl;
 #include <string>
 using std::string;
 
+//Macros de colores
+#define BLUE "\e[0;34m"         //POne el texto en color azul
+#define UBLUE "\e[4;34m"        //Color azul con subrayado
+#define RED "\e[0;31m"          //Color rojo
+#define GREEN "\e[0;32m"        //Color verde
+#define BGREEN "\e[1;32m"       //Color verde con negrita
+#define RESET "\e[0m"           //Reset de formato de letra (color, negrita,..)
+#define CLEAR "\33[2J"          //Hace un clear pero mas bonito
+
+////////////////////////////////////////////////////////////////////////////////
+
 //Devuelve el path de la carpeta donde estan los iconos
 string getpath() {
    char cwd[PATH_MAX];
@@ -20,20 +31,20 @@ string getpath() {
        return (ruta_ejec + "/icons/");   //ruta donde se esta ejecutando el programa
    }
    else {
-       cout << "\e[0;31m";      //Color rojo
+       cout << RED;      //Color rojo
        perror("getcwd() error");
-       cout << "\e[0m";         //Reset de formato de letra (color, negrita,..)
+       cout << RESET;         //Reset de formato de letra (color, negrita,..)
        return "error";
    }
 }
 
 int main() {
     //system("clear");
-    cout << "\33[2J";       //hace un clear pero mas bonito
+    cout << CLEAR;       //hace un clear pero mas bonito
     cout << endl;
-    cout << "\e[4;34m";     //Color azul
+    cout << UBLUE;     //Color azul
     cout << "\t" << "Project_Hex" << endl;
-    cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
+    cout << RESET;        //Reset de formato de letra (color, negrita,..)
     cout << endl;
 
     string app, icon;                           //nombre app, nombre del nuevo icono
@@ -45,9 +56,9 @@ int main() {
 
     ifstream fileinfo(filenameinfo);
     if (!fileinfo){
-        cout << "\e[0;31m";     //Color rojo
+        cout << RED;     //Color rojo
         cout << "Error al abrir el archivo de la info" << endl;
-        cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
+        cout << RESET;        //Reset de formato de letra (color, negrita,..)
         exit(-1);
     }
 
@@ -59,18 +70,18 @@ int main() {
 
         app = ruta + app;
         if((path = getpath()) == "error"){
-            cout << "\e[0;31m";      //Color rojo
+            cout << RED;      //Color rojo
             cout << "Error al encontrar el path de la carpeta icon";
-            cout << "\e[0m";         //Reset de formato de letra (color, negrita,..)
+            cout << RESET;         //Reset de formato de letra (color, negrita,..)
         }
         icon = getpath() + icon;
         ifstream fileapp(app);                         //abre el archivo de dicha app
         ofstream fileapptemp(ruta + "filetemp.txt");   //abre el archivo temporalde la app
         if(!(fileapp.is_open()) || !(fileapptemp.is_open())){                  //no se pudo abrir alguno de los 2
-            cout << "\e[0;31m";     //Color rojo
+            cout << RED;     //Color rojo
             cout << "Error al abrir el archivo de la app" << endl;
             cout << "Compruebe que haya asignado privilegios al programa" << endl;
-            cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
+            cout << RESET;
             exit(-1);
         }
 
@@ -92,16 +103,16 @@ int main() {
 
 
             fileapp.close();
-            cout << "\e[0;32m";     //Pone las letras en color verde
+            cout << GREEN;     //Pone las letras en color verde
             cout << "   OK" << endl;
-            cout << "\e[0m";        //Reset de formato de letra (color, negrita,..)
+            cout << RESET;        //Reset de formato de letra (color, negrita,..)
     }
     fileinfo.close();
     cout << endl;
-    cout << "\e[1;32m";             //Pone las letras en color verde
+    cout << BGREEN;
     cout << "--Iconos cambiados correctamente. DONE.--" << endl;
-    cout << "\e[0m";                //Reset de formato de letra (color, negrita,..)
-    cout << "\e[0;34m" << endl;     //Color azul
+    cout << RESET;                //Reset de formato de letra (color, negrita,..)
+    cout << BLUE << endl;     //Color azul
     cout << "Pulse intro para terminar el programa" << endl;
     getchar();
     system("reset");
