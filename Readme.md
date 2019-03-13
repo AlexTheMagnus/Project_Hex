@@ -2,6 +2,8 @@
 
 Could a program that change ubuntu app icons be a good idea? I think it's.
 
+> **Note:** *This program can only change icons from apt/apt-get installed programs. This program can change icons from programs installed with .deg packages too.*
+
 ## Getting Started
 
 Follow the easy next steps to have your custom ubuntu icons.
