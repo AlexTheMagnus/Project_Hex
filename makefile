@@ -4,4 +4,4 @@ all : Project_Hex.cc
 clean :
 	rm -f *.o
 
-#Working in progress
+#Work in progress
