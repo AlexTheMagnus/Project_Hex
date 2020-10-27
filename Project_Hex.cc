@@ -1,5 +1,5 @@
 //Debe ser ejecutado como admin "sudo ./Project_Hex.out"
-//ruta = "/usr/share/applications/"
+//appPath = "/usr/share/applications/"
 #include <unistd.h>
 #include <limits.h>
 
@@ -31,8 +31,8 @@ string getpath()
   char cwd[PATH_MAX];
   if (getcwd(cwd, sizeof(cwd)) != NULL)
   {
-    string ruta_ejec(cwd);          //Paso de char* a string con el constructor de string
-    return (ruta_ejec + "/icons/"); //ruta donde se esta ejecutando el programa
+    string executionPath(cwd);          //Paso de char* a string con el constructor de string
+    return (executionPath + "/icons/"); //ruta donde se esta ejecutando el programa
   }
   else
   {
@@ -94,34 +94,33 @@ ifstream openFile(string fileNameInfo)
   return fileInfo;
 }
 
-void createNewAppFile(ifstream &fileapp, ofstream &fileapptemp, string linea, string icon)
+void createNewAppFile(ifstream &fileApp, ofstream &fileAppTemp, string fileLine, string iconName)
 {
-  while (getline(fileapp, linea, '\n'))
+  while (getline(fileApp, fileLine, '\n'))
   {
-    if ((linea.compare(0, 5, "Icon=")) == 0)
-    {                         //comprueba si se encuentra en la linea de "Icon="
-      linea = "Icon=" + icon; //si entra cambia la ruta del icono
+    if ((fileLine.compare(0, 5, "Icon=")) == 0)
+    {                                //comprueba si se encuentra en la linea de "Icon="
+      fileLine = "Icon=" + iconName; //si entra cambia la ruta del icono
     }
-    fileapptemp << linea << endl; //escribe en el nuevo fichero
+    fileAppTemp << fileLine << endl; //escribe en el nuevo fichero
   }
 }
 
-void replaceAppFile(ifstream &fileapp, ofstream &fileapptemp, string app, string ruta)
+void replaceAppFile(ifstream &fileApp, ofstream &fileAppTemp, string appName, string appPath)
 {
-  fileapp.close();
-  fileapptemp.close();
-  remove(app.c_str());                                  // borrar el original
-  rename((ruta + "filetemp.txt").c_str(), app.c_str()); // renombrar el temporal
+  fileApp.close();
+  fileAppTemp.close();
+  remove(appName.c_str());                                     // borrar el original
+  rename((appPath + "filetemp.txt").c_str(), appName.c_str()); // renombrar el temporal
 }
 
-void updateAppFile(string linea, string icon, string app, string ruta)
+void updateAppFile(string fileLine, string iconName, string appName, string appPath)
 {
 
-  cout << app << endl;
-  ifstream fileapp(app);                       //abre el archivo de dicha app
-  ofstream fileapptemp(ruta + "filetemp.txt"); //abre el archivo temporal de la app
+  ifstream fileApp(appName);                      //abre el archivo de dicha app
+  ofstream fileAppTemp(appPath + "filetemp.txt"); //abre el archivo temporal de la app
 
-  if (!(fileapp.is_open()) || !(fileapptemp.is_open()))
+  if (!(fileApp.is_open()) || !(fileAppTemp.is_open()))
   {              //no se pudo abrir alguno de los 2
     cout << RED; //Color rojo
     cout << "Error al abrir el archivo de la app" << endl;
@@ -131,52 +130,52 @@ void updateAppFile(string linea, string icon, string app, string ruta)
   }
 
   //crear nuevo fichero de la app a raíz del original
-  createNewAppFile(fileapp, fileapptemp, linea, icon);
+  createNewAppFile(fileApp, fileAppTemp, fileLine, iconName);
 
   //reemplazar un archivo por otro
-  replaceAppFile(fileapp, fileapptemp, app, ruta);
+  replaceAppFile(fileApp, fileAppTemp, appName, appPath);
 
-  fileapp.close();
+  fileApp.close();
 }
 
-void setApp(string ruta, string &app)
+void setApp(string appPath, string &appName)
 {
-  app = ruta + app;
+  appName = appPath + appName;
 }
 
-void setIcon(string path, string &icon)
+void setIcon(string iconFolderPath, string &iconName)
 {
-  if ((path = getpath()) == "error")
+  if ((iconFolderPath = getpath()) == "error")
   {
     printIconFolderNotFoundMessage();
   }
-  icon = getpath() + icon;
+  iconName = getpath() + iconName;
 }
 
 int main()
 {
   printWelcomeMessage();
 
-  string app, icon;                         //nombre app, nombre del nuevo icono
-  string ruta = "/usr/share/applications/"; //ruta a la carpeta de las apps
-  string path;                              //ruta de la carpeta icon
+  string appName, iconName;                    //nombre app, nombre del nuevo icono
+  string appPath = "/usr/share/applications/"; //ruta a la carpeta de las apps
+  string iconFolderPath;                       //ruta de la carpeta icon
   //Formato del fichero de info:  nombre_archivo_app,nombre_icono_nuevo
   string fileNameInfo = "info.txt"; //nombre del fichero con la info de las apps a cambiar el icono
-  string linea;
+  string fileLine;
 
   ifstream fileInfo = openFile(fileNameInfo);
 
   //getline devuelve falso cuando no hay mas lineas por leer
-  while (getline(fileInfo, app, ','))
+  while (getline(fileInfo, appName, ','))
   {
-    getline(fileInfo, icon, '\n');
-    cout << "Cambiando icono de " << app << "..." << endl;
+    getline(fileInfo, iconName, '\n');
+    cout << "Cambiando icono de " << appName << "..." << endl;
 
-    setApp(ruta, app);
-    setIcon(path, icon);
+    setApp(appPath, appName);
+    setIcon(iconFolderPath, iconName);
 
     //modificar fichero de la app
-    updateAppFile(linea, icon, app, ruta);
+    updateAppFile(fileLine, iconName, appName, appPath);
 
     printOKMessage();
   }
