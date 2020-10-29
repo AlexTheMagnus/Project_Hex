@@ -17,7 +17,7 @@ int main()
   string fileNameInfo = "info.txt"; //nombre del fichero con la info de las apps a cambiar el icono
   string fileLine;
 
-  ifstream fileInfo = openFile(fileNameInfo);
+  ifstream fileInfo = openFile("./" + fileNameInfo);
 
   //getline devuelve falso cuando no hay mas lineas por leer
   while (getline(fileInfo, appName, ','))
