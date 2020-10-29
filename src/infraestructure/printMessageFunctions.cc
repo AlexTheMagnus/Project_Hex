@@ -7,7 +7,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-#include "colors.cc"
+#include "../colorMacros.cc"
 
 void printWelcomeMessage() {
     cout << CLEAR;  //hace un clear pero mas bonito

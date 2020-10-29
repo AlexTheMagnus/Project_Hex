@@ -3,7 +3,7 @@
 
 #ifndef PRINTMESSAGEFUNCTIONS_H
 #define PRINTMESSAGEFUNCTIONS_H
-#include "printMessageFunctions.cc"
+#include "infraestructure/printMessageFunctions.cc"
 #endif
 
 string getFileInfoName(int argc, char *argv[]) {

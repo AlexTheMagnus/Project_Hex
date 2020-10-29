@@ -1,8 +1,8 @@
 //Debe ser ejecutado como admin "sudo ./Project_Hex.out"
 //appPath = "/usr/share/applications/"
 
-#include "fileFunctions.cc"
 #include "getters.cc"
+#include "infraestructure/fileFunctions.cc"
 
 ////////////////////////////////////////////////////////////////////////////////
 
