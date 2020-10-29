@@ -4,7 +4,7 @@
 using std::string;
 #endif
 
-class app {
+class App {
    private:
     string _settingFileName;
     string _newIconName;
@@ -13,6 +13,6 @@ class app {
     inline void setSettingFileName(string settingFileName) { _settingFileName = settingFileName; }
     inline void setNewIconName(string newIconName) { _newIconName = newIconName; }
 
-    inline string getSettingFileName(string pathToSettingFile) { return _settingFileName; }
-    inline string getNewIconName(string newIconName) { return _newIconName; }
+    inline string getSettingFileName() { return _settingFileName; }
+    inline string getNewIconName() { return _newIconName; }
 };

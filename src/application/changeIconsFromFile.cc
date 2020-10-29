@@ -1,23 +1,22 @@
-#ifndef STRING_H
-#define STRING_H
-#include <string>
-using std::string;
-#endif
-
 #include "../domain/app.cc"
+#include "../domain/fileReaderMapper.cc"
+#include "../domain/iconChanger.cc"
 
 class ChangeIconsFromFile {
    private:
+    FileReaderMapper _fileReaderMapper;
+    IconChanger _iconChanger;
+
    public:
-    ChangeIconsFromFile(/* recibe colaboradores: fileReader, iconChanger */);
+    ChangeIconsFromFile(FileReaderMapper fileReaderMapper, IconChanger iconChanger) {
+        _fileReaderMapper = fileReaderMapper;
+        _iconChanger = iconChanger;
+    };
 
     void run(string infoFilePath) {
-        app apps[] = fileReader();
+        std::vector<App> apps = _fileReaderMapper.mapFileToApps(infoFilePath);
         for (int iterator = 0; iterator < apps.size(); iterator++) {
-            iconChanger(apps[iterator].getSettingFileName(), apps[iterator].getNewIconName());
+            _iconChanger.changeIconOf(apps[iterator].getSettingFileName(), apps[iterator].getNewIconName());
         }
     }
 };
-
-ChangeIconsFromFile::ChangeIconsFromFile(/* recibe colaboradores: fileReader, iconChanger */) {
-}
