@@ -3,3 +3,4 @@
 *.out
 icons/*.png
 icons/*.svg
+.vscode/*

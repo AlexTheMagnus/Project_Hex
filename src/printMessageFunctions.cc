@@ -19,6 +19,13 @@ void printWelcomeMessage() {
     cout << endl;
 }
 
+void printUnexpectedArgumentsMessage() {
+    cout << RED;  //Color rojo
+    cout << "Error, demasiados argumetos." << endl;
+    cout << "El uso adecuado es: \"sudo ./Project_Hex.out <infoFile.txt>\"" << endl;
+    cout << RESET;  //Reset de formato de letra (color, negrita,..)
+}
+
 void printOKMessage() {
     cout << GREEN;  //Pone las letras en color verde
     cout << "   OK" << endl;
