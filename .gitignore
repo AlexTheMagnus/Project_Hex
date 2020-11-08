@@ -1,6 +1,7 @@
 *.png
 *.txt
 *.out
+*.test.cc
 icons/*.png
 icons/*.svg
 .vscode/*
