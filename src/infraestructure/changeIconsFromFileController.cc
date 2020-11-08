@@ -27,7 +27,7 @@ class changeIconsFromFileController {
     }
 
    public:
-    void changeIconsFromFile(string infoFileName = "./info.txt") {
+    void changeIconsFromFile(string infoFileName) {
         printWelcomeMessage();
 
         NativeFileReaderMapper fileReaderMapper;

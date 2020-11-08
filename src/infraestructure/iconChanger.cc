@@ -42,6 +42,13 @@ class NativeIconChanger : public IconChanger {
         std::cout << RESET;  //Reset de formato de letra (color, negrita,..)
     }
 
+    void printErrorOpeningAppFileMessage() {
+        std::cout << RED;  //Color rojo
+        std::cout << "Error al abrir el archivo de la app" << std::endl;
+        std::cout << "Compruebe que haya asignado privilegios al programa" << std::endl;
+        std::cout << RESET;
+    }
+
     string getIconFolderPath() {
         char cwd[PATH_MAX];
         if (getcwd(cwd, sizeof(cwd)) != NULL) {
@@ -57,20 +64,25 @@ class NativeIconChanger : public IconChanger {
         return getIconFolderPath() + iconName;
     }
 
-    ifstream openFile(string fileNameInfo) {
-        ifstream fileInfo(fileNameInfo);
-        if (!fileInfo) {
+    ifstream openFile(string infoFileName) {
+        ifstream infoFile(infoFileName);
+        if (!infoFile) {
             printErrorOpeningInfoFileMessage();
             exit(-1);
         }
 
-        return fileInfo;
+        return infoFile;
     }
 
     void createNewAppFile(string settingFileName, string iconName) {
         string fileLine;
         std::ifstream settingFile = openFile(getSettingFileFullPath(settingFileName));
         std::ofstream tempSettingFile(getAptAppsPath() + getTempFileName());
+
+        if (!(settingFile.is_open()) || !(tempSettingFile.is_open())) {  //no se pudo abrir alguno de los 2
+            printErrorOpeningAppFileMessage();
+            exit(-1);
+        }
 
         while (getline(settingFile, fileLine, '\n')) {
             if ((fileLine.compare(0, 5, "Icon=")) == 0) {
@@ -90,8 +102,6 @@ class NativeIconChanger : public IconChanger {
 
    public:
     void changeIconOf(string settingFileName, string newIconName) {
-        printChangingIconMessage(settingFileName);
-
         createNewAppFile(settingFileName, newIconName);
         replaceAppFile(settingFileName);
     }
